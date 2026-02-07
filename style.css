@@ -1,0 +1,274 @@
+/* =========================
+   إعدادات عامة
+========================= */
+
+html {
+  height: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  direction: rtl;
+
+  min-height: 100vh;
+  /* flex ما بضر، بس مش ضروري مع footer fixed */
+  display: flex;
+  flex-direction: column;
+
+  /* مساحة للفوتر حتى لا يغطي آخر المحتوى */
+  padding-bottom: 110px;
+}
+
+/* =========================
+   زر القائمة
+========================= */
+.menu-toggle {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 28px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+/* =========================
+   القائمة الجانبية
+========================= */
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #1a73e8;
+  color: #fff;
+  padding-top: 60px;
+  transition: right 0.3s ease;
+  z-index: 1000;
+}
+
+.side-menu.active {
+  right: 0;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.side-menu li {
+  padding: 15px 20px;
+}
+
+.side-menu button {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  text-align: right;
+  cursor: pointer;
+}
+
+.side-menu button:hover {
+  background-color: #1558b0;
+}
+
+/* =========================
+   المحتوى الرئيسي
+========================= */
+.main-content {
+  padding: 20px;
+  flex: 1;
+}
+
+/* =========================
+   النماذج و الأقسام
+========================= */
+form,
+.section {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  max-width: 700px;
+  margin: 0 auto 20px auto;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =========================
+   Footer (حقوق التطبيق) - ثابت أسفل الشاشة دائمًا
+========================= */
+#appFooter {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background: #0b5ed7;
+  color: #fff;
+
+  padding: 14px 10px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+
+  text-align: center;
+  direction: rtl;
+
+  /* مهم: يكون فوق كل شيء */
+  z-index: 99999;
+}
+
+#appFooter .footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}
+
+#appFooter a {
+  color: #fff;
+  text-decoration: none;
+}
+
+#appFooter a:hover {
+  text-decoration: underline;
+}
+
+#appFooter .sep {
+  opacity: 0.8;
+}
+
+/* =========================
+   تحسين للجوال
+========================= */
+@media (max-width: 480px) {
+  body {
+    padding-bottom: 140px;
+  }
+
+  #appFooter .footer-inner {
+    font-size: 12px;
+  }
+}
+
+/* =========================
+   إصلاح خاص: الفلترة + التقارير
+   (حتى يظهر الفوتر تحت مثل باقي الأقسام)
+========================= */
+#filterPage,
+#filterBox,
+#reportsPage,
+#reportsSection {
+  padding-bottom: 160px;   /* مساحة إضافية للفوتر */
+}
+
+/* =========================
+   Stats — نهائي مثل أمس (Grid)
+   العنوان يمين | الرقم | زر مشاهدة (يسار)
+========================= */
+
+#statsDetails .statsRow{
+  display:grid !important;
+  grid-template-columns: 1fr auto auto; /* عنوان | رقم | زر */
+  align-items:center !important;
+  gap:10px !important;
+
+  padding:10px 12px;
+  border:1px solid #e9ecef;
+  border-radius:12px;
+  background:#fff;
+  margin-bottom:8px;
+}
+
+/* العنوان يمين */
+#statsDetails .statsRow .label{
+  text-align:right !important;
+  color:#222;
+  font-weight:800;
+  font-size:14px;
+  min-width:0;
+}
+
+/* الرقم بالعمود الأوسط */
+#statsDetails .statsRow .value{
+  min-width:52px;          /* يثبت مكان الرقم */
+  text-align:left !important;
+  color:#0b5ed7;
+  font-weight:900;
+  font-size:14px;
+  direction:ltr;           /* يمنع انقلاب أرقام/مدى */
+}
+
+/* لو عندك actions (قديمة) خلّيها ما تأثر */
+#statsDetails .statsRow .actions{
+  display:contents !important; /* يحوّل value والزر لأعمدة منفصلة */
+}
+
+/* زر مشاهدة (عمود ثالث) */
+#statsDetails .statsBtn{
+  width:auto !important;
+  margin:0 !important;
+  padding:6px 12px !important;
+  font-size:13px !important;
+  font-weight:800 !important;
+  border-radius:8px !important;
+  background:#198754 !important;
+  color:#fff !important;
+  border:none !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  white-space:nowrap !important;
+}
+
+/* ✅ تمييز سطر "أطفال بدون عمر" فقط (بدون زر) */
+#statsDetails .statsRow.statsNoAge{
+  border-color:#ffe08a !important;
+  background:#fff8db !important;
+}
+#statsDetails .statsRow.statsNoAge .label,
+#statsDetails .statsRow.statsNoAge .value{
+  color:#8a6d00 !important;
+}
